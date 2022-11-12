@@ -28,7 +28,7 @@ public interface PessimisticRepository extends JpaRepository<PessimisticEntity, 
   @Transactional
   @Query("SELECT p FROM PessimisticEntity  p WHERE p.id = :id")
   @QueryHints({@QueryHint(name = "javax.persistence.query.timeout", value = "1000")})
-  Optional<PessimisticEntity> findPessimisticEntitiesWithLock(@Param("id") Long id) throws QueryTimeoutException;
+  Optional<PessimisticEntity> findPessimisticEntitiesWithLock(@Param("id") Long id);
 
 
 }

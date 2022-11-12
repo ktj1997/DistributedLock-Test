@@ -27,6 +27,5 @@ public class PessimisticService implements Consumer<Long> {
     }catch (QueryTimeoutException e){
       System.out.println("Lock TimeOut");
     }
-
   }
 }

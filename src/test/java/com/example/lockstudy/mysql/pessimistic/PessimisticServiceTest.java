@@ -1,5 +1,6 @@
 package com.example.lockstudy.mysql.pessimistic;
 
+import com.example.lockstudy.ConcurrencyTestProvider;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,24 +21,11 @@ class PessimisticServiceTest {
 
   @Test
   public void decreaseInRaceCondition() throws InterruptedException {
-    StopWatch stopWatch = new StopWatch();
-    ExecutorService concurrencyService = Executors.newFixedThreadPool(32);
-    CountDownLatch latch = new CountDownLatch(200);
-    stopWatch.start();
+    int countExpect = 200;
+    ConcurrencyTestProvider tester = new ConcurrencyTestProvider();
+    tester.test(1L, countExpect, service);
 
-    for (int i = 0; i < 200; i++) {
-      concurrencyService.submit(() -> {
-        try {
-          Assertions.assertDoesNotThrow(() -> service.accept(1L));
-        } finally {
-          latch.countDown();
-        }
-      });
-    }
-    latch.await();
-    stopWatch.stop();
-    System.out.println(stopWatch.prettyPrint());
+    Assertions.assertEquals(countExpect, repository.findById(1L).get().getCounter());
 
-    Assertions.assertEquals(200, repository.findById(1L).get().getCounter());
   }
 }
