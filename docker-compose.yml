@@ -3,12 +3,12 @@ version: "3.7"
 services:
   redis:
     image: redis:3
-    container_name: example_redis
+    container_name: lock_redis
     ports:
       - "6379:6379"
   mysql:
     image: mysql:8.0
-    container_name: example_mysql
+    container_name: lock_mysql
     restart: always
     ports:
       - "3306:3306"
@@ -17,5 +17,3 @@ services:
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - "mysql_data:/var/lib/mysql"
