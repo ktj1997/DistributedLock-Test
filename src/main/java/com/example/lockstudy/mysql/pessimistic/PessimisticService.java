@@ -16,7 +16,7 @@ public class PessimisticService implements Consumer<Long> {
   @Transactional
   public void accept(Long id) {
     try {
-      PessimisticEntity entity = pessimisticRepository.findPessimisticEntitiesWithLock(id)
+      PessimisticEntity entity = pessimisticRepository.findEntityWithPessimisticLock(id)
           .orElseThrow(RuntimeException::new);
       System.out.println("Entity's count : " + entity.getCounter());
       Thread.sleep(100);
