@@ -20,7 +20,7 @@ public class PessimisticService implements Consumer<Long> {
           .orElseThrow(RuntimeException::new);
       System.out.println("Entity's count : " + entity.getCounter());
       Thread.sleep(100);
-      entity.increase();
+      entity.decrease();
       System.out.println("Entity's count : " + entity.getCounter());
     }catch (InterruptedException e){
       System.out.println("Thread Exception");

@@ -20,8 +20,11 @@ public class PessimisticEntity {
 
   private int counter;
 
-  public void increase() {
-    counter++;
+  public void decrease() {
+    if (counter == 0) {
+      throw new RuntimeException("Not Enough");
+    }
+    counter--;
   }
 
 }

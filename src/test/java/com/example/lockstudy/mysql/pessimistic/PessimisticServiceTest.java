@@ -17,11 +17,10 @@ class PessimisticServiceTest {
 
   @Test
   public void increaseInRaceCondition() throws InterruptedException {
-    int countExpect = 200;
     ConcurrencyTestProvider tester = new ConcurrencyTestProvider();
-    tester.test(1L, countExpect, service);
+    tester.test(1L, 100, service);
 
-    Assertions.assertEquals(countExpect, repository.findById(1L).get().getCounter());
+    Assertions.assertEquals(0, repository.findById(1L).get().getCounter());
 
   }
 }

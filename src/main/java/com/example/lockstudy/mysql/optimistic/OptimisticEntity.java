@@ -27,8 +27,11 @@ public class OptimisticEntity {
   @Version
   private Long version;
 
-  public void increase() {
-    counter++;
+  public void decrease() {
+    if (counter == 0) {
+      throw new RuntimeException("Not Enough");
+    }
+    counter--;
   }
 
 }

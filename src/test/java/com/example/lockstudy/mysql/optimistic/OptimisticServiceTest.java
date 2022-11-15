@@ -19,9 +19,9 @@ class OptimisticServiceTest {
   @Test
   public void increaseInRaceCondition() throws InterruptedException {
     ConcurrencyTestProvider provider = new ConcurrencyTestProvider();
-    provider.test(1L, 200, service);
+    provider.test(1L, 100, service);
 
-    Assertions.assertEquals(200, repository.findById(1L).get().getCounter());
+    Assertions.assertEquals(0, repository.findById(1L).get().getCounter());
   }
 
 }

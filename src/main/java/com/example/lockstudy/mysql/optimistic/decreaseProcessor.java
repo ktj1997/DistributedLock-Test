@@ -6,14 +6,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
-public class IncreaseProcessor {
+public class decreaseProcessor {
 
   private final OptimisticRepository optimisticRepository;
 
   @Transactional
   public void increase(Long id) {
     OptimisticEntity entity = optimisticRepository.findById(id).orElseThrow(RuntimeException::new);
-    entity.increase();
+    entity.decrease();
     ;
   }
 }

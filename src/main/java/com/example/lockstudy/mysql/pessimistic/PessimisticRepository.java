@@ -32,7 +32,7 @@ public interface PessimisticRepository extends JpaRepository<PessimisticEntity, 
   @Lock(LockModeType.PESSIMISTIC_WRITE)
   @Query("SELECT p FROM PessimisticEntity  p WHERE p.id = :id")
   @QueryHints({
-      @QueryHint(name = "javax.persistence.query.timeout", value = "1000"),
+      @QueryHint(name = "javax.persistence.query.timeout", value = "2000"),
       @QueryHint(name = "javax.persistence.lock.scope", value = "NORMAL")})
   Optional<PessimisticEntity> findEntityWithPessimisticLock(@Param("id") Long id);
 
