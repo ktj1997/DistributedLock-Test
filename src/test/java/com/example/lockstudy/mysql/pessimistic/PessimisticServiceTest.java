@@ -16,7 +16,7 @@ class PessimisticServiceTest {
   private PessimisticService service;
 
   @Test
-  public void increaseInRaceCondition() throws InterruptedException {
+  public void decreaseInRaceCondition() throws InterruptedException {
     ConcurrencyTestProvider tester = new ConcurrencyTestProvider();
     tester.test(1L, 100, service);
 
