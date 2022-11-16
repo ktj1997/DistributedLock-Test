@@ -14,12 +14,19 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+/**
+ * 해당 Aspect의 @Order를 지정해준 이유
+ *
+ * Aspect는 Proxy로, 우선순위가 높다는건 가장 바깥에 있다 는 것이다.
+ * 즉, 가장 낮은 우선순위부터 원본객체를 감싼다는 의미이고,
+ * @Transcational이 적용된 AOP를 감싸야 하기 떄문에, @EnableTransactionManagement의 Order보다
+ * 이 Aspect가 우선순위가 높아야 한다.
+ */
 @Aspect
 @Component
-@Order(value = Ordered.LOWEST_PRECEDENCE)
+@Order(value = Ordered.LOWEST_PRECEDENCE - 1)
 public class NamedLockAspect {
 
-  private final ApplicationContext acc;
   private final DataSource lockDataSource;
 
   private final LockRepository lockRepository;
@@ -31,7 +38,6 @@ public class NamedLockAspect {
       ApplicationContext acc) {
     this.lockDataSource = lockDataSource;
     this.lockRepository = lockRepository;
-    this.acc = acc;
   }
 
   @Around("@annotation(namedLock)")

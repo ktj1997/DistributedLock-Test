@@ -8,8 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class NamedServiceTest {
+
   @Autowired
-  private NamedLockProcessor processor;
+  private NamedService service;
 
   @Autowired
   private NamedRepository repository;
@@ -17,7 +18,7 @@ class NamedServiceTest {
   @Test
   public void decreaseInRaceCondition() throws InterruptedException {
     ConcurrencyTestProvider provider = new ConcurrencyTestProvider();
-    provider.test(1L, 100, processor);
+    provider.test(1L, 100, service);
 
     Assertions.assertEquals(0, repository.findById(1L).get().getCounter());
   }
