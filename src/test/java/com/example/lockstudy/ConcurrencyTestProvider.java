@@ -9,10 +9,8 @@ import org.springframework.util.StopWatch;
 public class ConcurrencyTestProvider {
 
   public void test(Long id, int count, Consumer<Long> processor) throws InterruptedException {
-    StopWatch stopWatch = new StopWatch();
     ExecutorService concurrencyService = Executors.newFixedThreadPool(32);
     CountDownLatch latch = new CountDownLatch(count);
-    stopWatch.start();
 
     for (int i = 0; i < count; i++) {
       concurrencyService.submit(() -> {

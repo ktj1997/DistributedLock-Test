@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.sql.DataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class LockRepository {
 
@@ -23,6 +25,7 @@ public class LockRepository {
     if (!rs.next()) {
       throw new RuntimeException("Get Lock Fail");
     }
+    log.info("Get Lock {} Success", key);
   }
 
   public void releaseLock(Connection conn, String key) throws SQLException {
@@ -32,5 +35,6 @@ public class LockRepository {
     if (!rs.next()) {
       throw new RuntimeException("Release Lock Fail");
     }
+    log.info("Release Lock {} Success", key);
   }
 }

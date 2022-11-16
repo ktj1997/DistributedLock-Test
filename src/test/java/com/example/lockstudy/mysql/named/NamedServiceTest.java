@@ -1,7 +1,5 @@
 package com.example.lockstudy.mysql.named;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.example.lockstudy.ConcurrencyTestProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class NamedServiceTest {
-
   @Autowired
   private NamedLockProcessor processor;
 
