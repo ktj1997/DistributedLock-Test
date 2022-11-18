@@ -10,3 +10,6 @@ VALUES (1, 100);
 
 INSERT INTO spin(id, counter)
 VALUES (1, 100);
+
+INSERT INTO pubsub(id, counter)
+VALUES (1, 100);
